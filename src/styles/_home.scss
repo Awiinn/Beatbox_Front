@@ -1,0 +1,53 @@
+@import "_variables";
+@import "_mixins";
+
+.home-main {
+  width: 100%;
+  height: 60px;
+}
+.home-main h1 {
+  @include flexDirection(row);
+  @include justifyContent(center);
+}
+
+.data-container {
+  @include flexDirection(row);
+  flex-wrap: wrap;
+  margin: 4px;
+  padding: 2px 16px;
+  @include justifyContent(center);
+}
+
+.data-card-container {
+  height: 300px;
+  width: 250px;
+  margin: 10px;
+  @include flexDirection(row);
+  @include justifyContent(center);
+  flex-wrap: wrap;
+  background-color: $primaryColor;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.data-card-container:hover {
+  box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
+}
+
+.image-container {
+  height: 150px;
+  width: 100%;
+  background-color: $secondaryColor;
+}
+
+.data-card-info-container {
+  margin-top: 2px;
+  @include flexDirection(column);
+}
+
+.data-card-info {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

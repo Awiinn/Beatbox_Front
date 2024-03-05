@@ -1,18 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import "./index.css";
-import Users from "./components/Users/Users";
-import Navigation from "./components/Navigation/Navigation";
-import Home from "./components/Home/Home";
-import AuthForm from "./components/Auth/AuthForm";
+import Users from "./components/Users";
+import Home from "./components/Home";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import SideBar from "./components/SideBar";
 
 function App() {
   return (
     <div>
-      <Navigation />
+      <SideBar />
       <Routes>
         <Route path={"/"} element={<Home />} />
         <Route path={"/users"} element={<Users />} />
-        <Route path={"/auth"} element={<AuthForm />} />
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/register"} element={<Register />} />
       </Routes>
     </div>
   );
