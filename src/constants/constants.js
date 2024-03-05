@@ -46,4 +46,10 @@ export const sideBarData = [
     path: "/users",
     cName: "nav-text",
   },
+  {
+    name: "Search",
+    icon: "icon5",
+    path: "/search",
+    cName: "nav-text",
+  },
 ];
