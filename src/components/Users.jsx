@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useGetUsersQuery } from "../../redux/api/userApi";
+import { useGetUsersQuery } from "../redux/api/userApi";
 
 const Users = () => {
-  const { data: usersData, isLoading, isError, refetch } = useGetUsersQuery();
+  const { data: usersData, isLoading, isError } = useGetUsersQuery();
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -12,12 +12,15 @@ const Users = () => {
   }, [usersData]);
 
   if (isError) {
-    return <div>Error loading users</div>;
+    return <div className="loading-error">Oh no! Error loading users</div>;
   }
 
   return (
     <>
-      <div className="user-container">
+      <div className="users-main">
+        <h1>Users</h1>
+      </div>
+      <div className="users-wrapper">
         {isLoading ? (
           <h1>Loading...</h1>
         ) : (
@@ -33,8 +36,6 @@ const Users = () => {
           ))
         )}
       </div>
-      <br />
-      <button onClick={() => refetch()}>Refresh Users</button>
     </>
   );
 };

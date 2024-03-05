@@ -1,0 +1,16 @@
+@import "./home";
+@import "./login";
+@import "./sideBar";
+@import "./register";
+@import "./variables";
+@import "./mixins";
+@import "./users";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $tertiaryColor;
+}
