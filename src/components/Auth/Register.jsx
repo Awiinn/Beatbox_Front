@@ -1,52 +1,36 @@
 import { useState } from "react";
-import { useLoginMutation, useRegisterMutation } from "../../redux/api/authApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-/**
- * AuthForm allows a user to either login or register for an account.
- */
-function AuthForm() {
-  const [login] = useLoginMutation();
-  const [register] = useRegisterMutation();
-  const [error, setError] = useState(null);
-
+const Register = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [error, setError] = useState(null);
+  const nav = useNavigate();
 
-  const [isLogin, setIsLogin] = useState(true);
-  const authType = isLogin ? "Login" : "Register";
-  const navigate = useNavigate();
-  const oppositeAuthCopy = isLogin
-    ? "Don't have an account?"
-    : "Already have an account?";
-  const oppositeAuthType = isLogin ? "Register" : "Login";
-
-  /**
-   * Send credentials to server for authentication
-   */
-  async function attemptAuth(event) {
-    event.preventDefault();
+  const attemptRegister = async (e) => {
+    e.preventDefault();
     setError(null);
 
-    const authMethod = isLogin ? login : register;
-    const credentials = { firstName, lastName, email, password };
+    const credentials = { firstName, lastName, email, password, username };
 
     try {
-      await authMethod(credentials).unwrap();
-      navigate("/");
+      await credentials.unwrap();
+      nav("/login");
     } catch (error) {
       setError(error.data);
     }
-  }
-
+  };
   return (
     <>
-      <section>
+      <div className="register-main">
+        <h1>Register</h1>
+      </div>
+      <section className="register-wrapper">
         <div className="form">
-          <h1>{authType}</h1>
-          <form onSubmit={attemptAuth} name={authType}>
+          <form onSubmit={attemptRegister} name="Register">
             <label>First Name</label>
             <br />
             <input
@@ -65,6 +49,17 @@ function AuthForm() {
               name="lastName"
               onChange={(event) => {
                 setLastName(event.target.value);
+              }}
+            />
+            <br />
+            <br />
+            <label>Username</label>
+            <br />
+            <input
+              type="text"
+              name="username"
+              onChange={(event) => {
+                setUsername(event.target.value);
               }}
             />
             <br />
@@ -91,16 +86,17 @@ function AuthForm() {
             />
             <br />
             <br />
-            <button type="submit">{authType}</button>
+            <button type="submit">Register</button>
           </form>
+          <br />
           <p>
-            {oppositeAuthCopy}{" "}
+            Already have an account?
             <button
               onClick={() => {
-                setIsLogin(!isLogin);
+                nav("/login");
               }}
             >
-              {oppositeAuthType}
+              Login
             </button>
           </p>
           {error && <p className={"error"}>{error}</p>}
@@ -108,6 +104,6 @@ function AuthForm() {
       </section>
     </>
   );
-}
+};
 
-export default AuthForm;
+export default Register;
