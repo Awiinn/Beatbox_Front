@@ -14,3 +14,26 @@
 body {
   background-color: $tertiaryColor;
 }
+.album-list-container {
+  max-height: 400px; /* Set the maximum height for the scrollable container */
+}
+.playlist-list-container {
+  max-height: 400px; /* Set the maximum height for the scrollable container */
+}
+.album-list {
+  display: flex;
+  flex-direction: flex;
+  align-items: center;
+}
+.playlist-list {
+  display: flex;
+  flex-direction: flex;
+  align-items: center;
+}
+h2 {
+  color: bisque;
+}
+.scrollable-row {
+  max-height: 500px; // Set the maximum height of the scrollable row
+  overflow-y: auto; // Enable vertical scrolling for the row
+}
