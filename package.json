@@ -14,12 +14,16 @@
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router": "^6.22.1",
     "react-router-dom": "^6.22.1",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "spotify-web-api-node": "^5.0.2",
+    "styled": "^1.0.0",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

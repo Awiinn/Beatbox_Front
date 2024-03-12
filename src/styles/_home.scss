@@ -26,13 +26,13 @@
   @include justifyContent(center);
   flex-wrap: wrap;
   background-color: $primaryColor;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(245, 2, 2, 0.976);
   transition: 0.3s;
   border-radius: 10px;
 }
 
 .data-card-container:hover {
-  box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 32px 0 rgb(247, 5, 5);
 }
 
 .image-container {
