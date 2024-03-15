@@ -52,4 +52,10 @@ export const sideBarData = [
     path: "/search",
     cName: "nav-text",
   },
+  {
+    name: "Your Library",
+    icon: "icon5",
+    path: "/music",
+    cName: "nav-text",
+  },
 ];
