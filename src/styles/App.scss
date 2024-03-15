@@ -6,6 +6,7 @@
 @import "./mixins";
 @import "./users";
 
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -13,6 +14,9 @@
 
 body {
   background-color: $tertiaryColor;
+}
+.TrackContainer{
+  color: aqua;
 }
 .album-list-container {
   max-height: 400px; /* Set the maximum height for the scrollable container */
@@ -33,7 +37,15 @@ body {
 h2 {
   color: bisque;
 }
+h1 {
+  color: whitesmoke;
+}
 .scrollable-row {
   max-height: 500px; // Set the maximum height of the scrollable row
-  overflow-y: auto; // Enable vertical scrolling for the row
+  overflow-y: auto; 
+}
+.App {
+  color: bisque;
+  align-items: center;
+  text-align: center;
 }

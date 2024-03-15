@@ -1,40 +1,9 @@
-// import { dataArray } from "../constants/constants";
-// function Home() {
-//   return (
-//     <>
-//       <div className="home-main">
-//         <h1>Home</h1>
-//       </div>
-//       <div className="data-container">
-//         {dataArray.map((itm) => (
-//           <div key={itm.id} className="data-card-container">
-//             <div className="image-container">
-//               <img className="" src="http://imageurl.com" alt="albumcover" />
-//             </div>
-//             <div className="data-card-info-container">
-//               <p className="data-card-info">
-//                 <a>{itm.name}</a>
-//               </p>
-//               <p>
-//                 <a>{itm.artist}</a>
-//               </p>
-//               <p>
-//                 <a>{itm.album}</a>
-//               </p>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </>
-//   );
-// }
-
-// export default Home;
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "../styles/App.scss";
+
+
 
 const AlbumCard = styled.div`
   border: 1px solid transparent; /* Initial transparent border */
@@ -72,7 +41,7 @@ const PlaylistCard = styled.div`
   max-width: 150px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for floating effect */
   transition: all 0.3s ease; /* Transition effect for smooth animation */
-  background-color: #00000;
+  background-color: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,7 +62,7 @@ const PlaylistImage = styled.img`
 `;
 
 function Home() {
-  const CLIENT_ID = "YOUR_CLIENT_ID";
+  const CLIENT_ID = "3419d36f85604b6fb16bc730622cd529";
   const REDIRECT_URI = "http://localhost:5173/home";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -132,7 +101,7 @@ function Home() {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            limit: 50, // Adjust as needed
+            limit: 20, // Adjust as needed
           },
         }
       );
@@ -151,7 +120,7 @@ function Home() {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            limit: 50, // Adjust as needed
+            limit: 20, // Adjust as needed
           },
         }
       );
@@ -161,50 +130,65 @@ function Home() {
     }
   };
 
+  const handleAlbumClick = (albumId) => {
+    window.location.href = `/music/albums/${albumId}`;
+  };
+
+  const handlePlaylistClick = (playlistId) => {
+    window.location.href = `/playlist/playlists/${playlistId}`;
+  };
+
+  const authenticateWithSpotify = () => {
+    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`;
+  };
+
   return (
     <div className="Home">
       {!token ? (
-        <a
-          href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-        >
-          Login to Spotify
-        </a>
+        <button onClick={authenticateWithSpotify}>Login to Spotify</button>
       ) : (
         <>
-         <div className="scrollable-row">
-          <h2>Top Albums</h2>
-          <div className="album-container">
-            <div className="album-list">
-              {albums.map((album) => (
-                <AlbumCard key={album.id}>
-                  {album.images.length > 0 && (
-                    <AlbumImage src={album.images[0].url} alt={album.name} />
-                  )}
-                  <p>{album.name}</p>
-                  <p>
-                    By: {album.artists.map((artist) => artist.name).join(", ")}
-                  </p>
-                </AlbumCard>
-              ))}
-               </div>
+          <div className="scrollable-row">
+            <h2>Top Albums</h2>
+            <div className="album-container">
+              <div className="album-list">
+                {albums.map((album) => (
+                  <AlbumCard
+                    key={album.id}
+                    onClick={() => handleAlbumClick(album.id)}
+                  >
+                    {album.images.length > 0 && (
+                      <AlbumImage src={album.images[0].url} alt={album.name} />
+                    )}
+                    <p>{album.name}</p>
+                    <p>
+                      By:{" "}
+                      {album.artists.map((artist) => artist.name).join(", ")}
+                    </p>
+                  </AlbumCard>
+                ))}
+              </div>
             </div>
           </div>
           <div className="scrollable-row">
-          <h2>Featured Playlists</h2>
-          <div className="playlist-container">
-            <div className="playlist-list">
-              {playlists.map((playlist) => (
-                <PlaylistCard key={playlist.id}>
-                  {playlist.images.length > 0 && (
-                    <PlaylistImage
-                      src={playlist.images[0].url}
-                      alt={playlist.name}
-                    />
-                  )}
-                  <p>{playlist.name}</p>
-                  <p>By: {playlist.owner.display_name}</p>
-                </PlaylistCard>
-              ))}
+            <h2>Featured Playlists</h2>
+            <div className="playlist-container">
+              <div className="playlist-list">
+                {playlists.map((playlist) => (
+                  <PlaylistCard
+                    key={playlist.id}
+                    onClick={() => handlePlaylistClick(playlist.id)}
+                  >
+                    {playlist.images.length > 0 && (
+                      <PlaylistImage
+                        src={playlist.images[0].url}
+                        alt={playlist.name}
+                      />
+                    )}
+                    <p>{playlist.name}</p>
+                    <p>By: {playlist.owner.display_name}</p>
+                  </PlaylistCard>
+                ))}
               </div>
             </div>
           </div>
