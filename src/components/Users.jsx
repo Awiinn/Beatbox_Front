@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const CLIENT_ID = "3419d36f85604b6fb16bc730622cd529";
+  const CLIENT_ID = "900f61788b9042578f7485802b7d09d7";
   const REDIRECT_URI = "http://localhost:5173/users";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -32,7 +32,7 @@ function App() {
         })
         .then((response) => {
           setUserData(response.data);
-          console.log(response.data)
+          console.log(response.data);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error.message);
@@ -66,16 +66,15 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        <header className="App-header"></header>
+      <div>
         {!token ? (
           <button onClick={authenticateWithSpotify}>Login to Spotify</button>
         ) : (
-          <>
+          <div>
             {userData && (
-              <div>
-                <h2>Profile</h2>
-                <div>
+              <div className="profile-main">
+                <h1>Profile</h1>
+                <div className="profile-wrapper">
                   {userData.images && userData.images.length > 1 && (
                     <img src={userData.images[1].url} alt="Profile" />
                   )}
@@ -85,20 +84,32 @@ function App() {
                 </div>
               </div>
             )}
-            <button onClick={() => fetchTopData("tracks")}>Fetch Top Tracks</button>
-            <button onClick={() => fetchTopData("artists")}>Fetch Top Artists</button>
-            <button onClick={handleLogout}>Logout</button>
-            {topData && (
-              <div>
-                <h2>Top {topData.type === "tracks" ? "Tracks" : "Artists"}</h2>
-                <ul>
-                  {topData.items.map((item) => (
-                    <li key={item.id}>{item.name}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </>
+            <br />
+            <br />
+            <div className="profile-info-wrap">
+              <button onClick={() => fetchTopData("tracks")}>
+                Fetch Top Tracks
+              </button>
+              <br />
+              <button onClick={() => fetchTopData("artists")}>
+                Fetch Top Artists
+              </button>
+              <br />
+              <button onClick={handleLogout}>Logout</button>
+              {topData && (
+                <div>
+                  <h2>
+                    Top {topData.type === "tracks" ? "Tracks" : "Artists"}
+                  </h2>
+                  <ul>
+                    {topData.items.map((item) => (
+                      <li key={item.id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
     </>

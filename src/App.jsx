@@ -28,30 +28,32 @@
 // }
 
 // export default App;
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Users from "./components/Users";
 import Home from "./components/Home";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/Sidenav";
 import Search from "./components/SearchArtist";
 import Music from "./components/Music/Music";
 import Playlist from "./components/Music/Playlist";
-import SpotifyPlayer from './SpotifyPlayer';
-
+import SpotifyPlayer from "./SpotifyPlayer";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function App() {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
+  const [showSidenav, setShowSidenav] = useState(false);
 
   useEffect(() => {
     async function getToken() {
       try {
-        const response = await fetch('/auth/token');
-        const json = await response.json();
-        setToken(json.access_token);
+        const response = await fetch("/auth/token");
+        const res = await response.json();
+        console.log(res);
+        setToken(res.access_token);
       } catch (error) {
-        console.error('Error fetching token:', error);
+        console.error("Error fetching token:", error);
       }
     }
     getToken();
@@ -59,7 +61,12 @@ function App() {
 
   return (
     <div>
-      <SideBar />
+      <header>
+        <div className="icon-wrapper">
+          <GiHamburgerMenu onClick={() => setShowSidenav(!showSidenav)} />
+        </div>
+      </header>
+      <SideBar show={showSidenav} />
       <Routes>
         <Route path={"/"} element={<Home />} />
         <Route path={"/home"} element={<Home />} />

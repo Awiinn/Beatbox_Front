@@ -27,7 +27,7 @@ const Login = () => {
         <h1>Login</h1>
       </div>
       <section className="login-wrapper">
-        <div className="form">
+        <div className="form-wrapper">
           <form onSubmit={attemptLogin} name="Login">
             <label>Email</label>
             <br />
