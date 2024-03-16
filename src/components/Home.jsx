@@ -3,14 +3,12 @@ import axios from "axios";
 import styled from "styled-components";
 import "../styles/App.scss";
 
-
-
 const AlbumCard = styled.div`
   border: 1px solid transparent; /* Initial transparent border */
   border-radius: 15px;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
-  max-width: 150px;
+  min-width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for floating effect */
   transition: all 0.3s ease; /* Transition effect for smooth animation */
   background-color: #000000;
@@ -18,12 +16,13 @@ const AlbumCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #f8f47e;
+  color: bisque;
 
   &:hover {
-    border-color: #fb0101; /* Border color on hover */
+    // border-color: #fb0101; /* Border color on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
     background-color: #202020; /* Background color on hover */
+    cursor: pointer;
   }
 `;
 
@@ -36,9 +35,9 @@ const AlbumImage = styled.img`
 const PlaylistCard = styled.div`
   border: 1px solid transparent; /* Initial transparent border */
   border-radius: 15px;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
-  max-width: 150px;
+  min-width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for floating effect */
   transition: all 0.3s ease; /* Transition effect for smooth animation */
   background-color: #000000;
@@ -46,23 +45,24 @@ const PlaylistCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #f8f47e;
+  color: bisque;
 
   &:hover {
-    border-color: #fcf8f8; /* Border color on hover */
+    // border-color: #fcf8f8; /* Border color on hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
     background-color: #202020; /* Background color on hover */
+    cursor: pointer;
   }
 `;
 
 const PlaylistImage = styled.img`
   width: 100%; /* Set image width to cover the entire card */
   height: auto; /* Set image height to auto to maintain aspect ratio */
-  border-radius: 15px; /* Ensure border radius is applied to the image */
+  border-radius: 10px; /* Ensure border radius is applied to the image */
 `;
 
 function Home() {
-  const CLIENT_ID = "3419d36f85604b6fb16bc730622cd529";
+  const CLIENT_ID = "900f61788b9042578f7485802b7d09d7";
   const REDIRECT_URI = "http://localhost:5173/home";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
@@ -143,11 +143,11 @@ function Home() {
   };
 
   return (
-    <div className="Home">
+    <div>
       {!token ? (
         <button onClick={authenticateWithSpotify}>Login to Spotify</button>
       ) : (
-        <>
+        <div>
           <div className="scrollable-row">
             <h2>Top Albums</h2>
             <div className="album-container">
@@ -170,6 +170,7 @@ function Home() {
               </div>
             </div>
           </div>
+          <br />
           <div className="scrollable-row">
             <h2>Featured Playlists</h2>
             <div className="playlist-container">
@@ -192,7 +193,7 @@ function Home() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function SpotifyPlayer() {
@@ -29,6 +29,7 @@ function SpotifyPlayer() {
     const script = document.createElement("script");
     script.src = "https://sdk.scdn.co/spotify-player.js";
     script.async = true;
+
     document.body.appendChild(script);
 
     // Clean up: remove the script when the component unmounts
@@ -43,7 +44,7 @@ function SpotifyPlayer() {
       if (window.Spotify) {
         // Spotify SDK script has been loaded
         window.onSpotifyWebPlaybackSDKReady = () => {
-          const player = new Spotify.Player({
+          const player = new window.Spotify.Player({
             name: "Web Playback SDK Player",
             getOAuthToken: (cb) => {
               cb(token);

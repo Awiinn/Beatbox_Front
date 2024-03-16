@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components"; 
@@ -9,7 +9,7 @@ const TrackContainer = styled.div`
 `;
 
 function Playlist() {
-  const CLIENT_ID = "3419d36f85604b6fb16bc730622cd529";
+  const CLIENT_ID = "900f61788b9042578f7485802b7d09d7";
   const REDIRECT_URI = "http://localhost:5173/music";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";

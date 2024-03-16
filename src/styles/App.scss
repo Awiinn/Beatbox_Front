@@ -5,17 +5,32 @@
 @import "./variables";
 @import "./mixins";
 @import "./users";
-
+@import "./profile";
 
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+header {
+  padding: 1rem 2rem;
+  background-color: aquamarine;
+  height: 4rem;
+  width: 100%;
 }
 
 body {
   background-color: $tertiaryColor;
 }
-.TrackContainer{
+
+.icon-wrapper {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.TrackContainer {
   color: aqua;
 }
 .album-list-container {
@@ -42,7 +57,7 @@ h1 {
 }
 .scrollable-row {
   max-height: 500px; // Set the maximum height of the scrollable row
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 .App {
   color: bisque;
